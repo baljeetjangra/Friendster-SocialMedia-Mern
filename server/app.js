@@ -2,14 +2,6 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const PORT = 5000;
-
-//import models
-require("./models/user");
-
-app.use(express.json());
-
-//import Routes
-app.use(require("./routes/auth"));
 const { MONGOURI } = require("./keys");
 
 //Create Connection to Mongo Db
@@ -21,6 +13,16 @@ mongoose.connection.on("connected", () => {
 mongoose.connection.on("error", () => {
   console.log("DB ERROR", error);
 });
+
+//import models
+require("./models/user");
+require("./models/post");
+
+app.use(express.json());
+
+//import Routes
+app.use(require("./routes/auth"));
+app.use(require("./routes/post"));
 
 //App listening to port
 app.listen(PORT, () => {

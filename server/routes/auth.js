@@ -27,13 +27,14 @@ router.post("/signup", (req, res) => {
           password: hashedpassword,
           name,
         });
-        user.save().then((user) => {
-          res
-            .json({ message: "User account created successfully" })
-            .catch((err) => {
-              console.log(err);
-            });
-        });
+        user
+          .save()
+          .then((user) => {
+            res.json({ message: "User account created successfully" });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       });
     })
     .catch((err) => console.log(err));
